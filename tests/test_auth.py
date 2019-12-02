@@ -62,9 +62,7 @@ class AuthTestSpotipy(unittest.TestCase):
     @classmethod
     def setUpClass(self):
 
-        missing = filter(lambda var: not os.getenv(CCEV[var]), CCEV)
-
-        if missing:
+        if not all(os.getenv(var) for var in CCEV.values()):
             raise Exception('Please set the client credentials for the test application using the following environment variables: {}'.format(CCEV.values()))
 
         self.username = os.getenv(CCEV['client_username'])
